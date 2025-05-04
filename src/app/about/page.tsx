@@ -1,65 +1,241 @@
-// src/app/about/page.tsx (or appropriate path)
+// src/pages/about.tsx
 "use client";
 
-import React from "react";
 import Image from "next/image";
-// import Link from "next/link"; // Not needed for this component, but keep if you add links later
 
-export default function AboutUs() {
+// Team Member Interface
+interface TeamMember {
+  id: number;
+  photoUrl: string | null;
+  name: string;
+  position: string;
+  description: string;
+}
+
+// TeamMemberCard Component
+const TeamMemberCard: React.FC<TeamMember> = ({ id, photoUrl, name, position, description }) => {
+  const getPlaceholderImage = (memberId: number): string =>
+    `/api/placeholder/150/150?text=Member+${memberId}`;
+
+  const imageUrl = photoUrl || getPlaceholderImage(id);
+
   return (
-    // Main container with padding, max-width, and font (assuming font-jaro is global or applied higher up)
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 font-jaro"> {/* Increased py for standalone page feel */}
-
-      {/* Single Section Layout: Grid for Text and Logo */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"> {/* Use items-center for vertical alignment */}
-
-        {/* Left Column: Text Content */}
-        <div className="p-6 rounded-lg order-2 md:order-1"> {/* Order changed for mobile view: logo first */}
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-6"> {/* Slightly increased margin-bottom */}
-            About Us
-          </h1>
-          {/* Paragraph 1 */}
-          <p className="text-gray-200 text-sm md:text-base leading-relaxed mb-4">
-            We are a group of gamers who believe that the current game industry,
-            dominated by large corporations focused on profit, doesnt serve the
-            true spirit of gaming. At CyberMoon, we position ourselves as a team
-            that creates games from gamers, for gamers, with an open,
-            step-by-step development process. Our mission is to bring engaging
-            and meaningful experiences to players while remaining true to our
-            passion for gaming.
-          </p>
-          {/* Paragraph 2 */}
-          <p className="text-gray-200 text-sm md:text-base leading-relaxed mb-4">
-            Our team, born from a shared dream, started as a group of strangers
-            brought together through a Telegram channel. We united around the
-            idea of building something special — games made with heart, not just
-            for profit. All of us work without payment, driven solely by our
-            love for games and our belief in creating something truly remarkable.
-          </p>
-          {/* Paragraph 3 */}
-          <p className="text-gray-200 text-sm md:text-base leading-relaxed">
-            Currently, our team consists of 20 talented individuals, but that
-            number is always growing as we continue to expand our reach and our
-            vision. We are always open to new ideas and collaboration, so feel
-            free to get in touch with us. Together, we can create the games
-            that gamers deserve!
-          </p>
+    <div className="group w-64 h-80 perspective-1000">
+      <div className="relative w-full h-full duration-1400 transition-all preserve-3d group-hover:rotate-y-180">
+        {/* Front Face */}
+        <div className="absolute inset-0 w-full h-full bg-gray-800 rounded-lg shadow-md overflow-hidden flex flex-col items-center justify-center text-center p-4 border border-gray-700 backface-hidden">
+          <div className="relative w-40 h-40 rounded-2xl overflow-hidden mb-4 border-2 border-blue-400">
+            <Image
+              src={imageUrl}
+              alt={photoUrl ? `${name}'s photo` : `Placeholder image for ${name}`}
+              fill
+              className="object-cover"
+              sizes="128px"
+              priority
+            />
+          </div>
+          <h3 className="text-lg font-semibold text-white">{name}</h3>
+          <p className="text-sm text-blue-300">{position}</p>
         </div>
 
-        {/* Right Column: Logo */}
-        <div className="p-6 rounded-lg flex justify-center items-center order-1 md:order-2"> {/* Order changed */}
-          <Image
-            src="/logo.png" // Ensure this path is correct relative to your public folder
-            alt="CyberMoon Logo"
-            width={300} // Consistent width/height as used before
-            height={300} // Adjust based on your logo's aspect ratio if needed
-            sizes="(max-width: 768px) 50vw, 33vw" // Re-using sizes, adjust if layout differs significantly
-            className="max-w-full h-auto" // Ensure it scales down
-            priority // Good practice if this image is likely visible on initial load
-          />
+        {/* Back Face */}
+        <div className="absolute inset-0 w-full h-full bg-blue-900 rounded-lg shadow-md overflow-hidden flex flex-col items-center justify-center text-center p-4 border border-blue-700 backface-hidden rotate-y-180">
+          <h3 className="text-lg font-semibold text-white mb-2">{name}</h3>
+          <p className="text-sm text-gray-200 leading-relaxed overflow-y-auto">
+            {description}
+          </p>
         </div>
-
       </div>
     </div>
   );
-}
+};
+
+// Sample Team Data
+const teamMembers: TeamMember[] = [
+  {
+    id: 1,
+    photoUrl: "/logo.png",
+    name: "Mikhail Nadishlyn",
+    position: "3d-artist",
+    description: "text",
+  },
+  {
+    id: 2,
+    photoUrl: "/logo.png",
+    name: "Nikol Overko",
+    position: "Game promoter",
+    description:
+      "text",
+  },
+  {
+    id: 3,
+    photoUrl: "/logo.png",
+    name: "Ilia Neronov",
+    position: "Programmer",
+    description:
+      "text",
+  },
+  {
+    id: 4,
+    photoUrl: "/logo.png",
+    name: "Igor Stanislavskiy",
+    position: "Game designer",
+    description:
+      "Text",
+  },  {
+    id: 5,
+    photoUrl: "/logo.png",
+    name: "Kostiantyn Dzybko",
+    position: "UFX Artist",
+    description:
+      "text",
+  },  {
+    id: 6,
+    photoUrl: "/logo.png",
+    name: "Stas Golovin",
+    position: "Programmer",
+    description:
+      "texte",
+  },  {
+    id: 7,
+    photoUrl: "/logo.png",
+    name: "Barsik",
+    position: "Game designer",
+    description:
+      "text",
+  },  {
+    id: 8,
+    photoUrl: "/logo.png",
+    name: "Rafael Enikeev",
+    position: "Game Desinger",
+    description:
+      "text",
+  },  {
+    id: 9,
+    photoUrl: "/logo.png",
+    name: "Kostiantyn Semerak",
+    position: "Product Manager",
+    description:
+      "text",
+  },  {
+    id: 10,
+    photoUrl: "/logo.png",
+    name: "Dmitry Mokrov",
+    position: "Sound designer",
+    description:
+      "text",
+  },  {
+    id: 11,
+    photoUrl: "/logo.png",
+    name: "Dmitry grabovskii",
+    position: "UI Artist",
+    description:
+      "text",
+  },  {
+    id: 12,
+    photoUrl: "/logo.png",
+    name: "Nikita",
+    position: "3d Artist",
+    description:
+      "text",
+  },  {
+    id: 13,
+    photoUrl: "/logo.png",
+    name: "Anton",
+    position: "QA",
+    description:
+      "text",
+  },  {
+    id: 14,
+    photoUrl: "/logo.png",
+    name: "Anton Mikriukov",
+    position: "3d Artist",
+    description:
+      "text",
+  },  {
+    id: 15,
+    photoUrl: "/logo.png",
+    name: "Dmitry Shlyago",
+    position: "3d Artist",
+    description:
+      "text",
+  },  {
+    id: 16,
+    photoUrl: "/logo.png",
+    name: "Cringe Master",
+    position: "SMM",
+    description:
+      "text",
+  },  {
+    id: 17,
+    photoUrl: "/logo.png",
+    name: "Oreh",
+    position: "Programmer",
+    description:
+      "text",
+  },  {
+    id: 18,
+    photoUrl: "/logo.png",
+    name: "Roman",
+    position: "Web Developer",
+    description:
+      "text",
+  },  {
+    id: 19,
+    photoUrl: "/logo.png",
+    name: "Carol Davis",
+    position: "Art Director",
+    description:
+      "text",
+  },
+  {
+    id: 20,
+    photoUrl: "/logo.png",
+    name: "Tina Thompson",
+    position: "Localization Manager",
+    description:
+      "text",
+  },
+];
+
+// Main Component
+const AboutUs: React.FC = () => {
+  return (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col items-center min-h-screen text-white">
+      {/* About Section */}
+      <div className="p-6 rounded-lg text-center mb-16 max-w-3xl w-full">
+        <h1 className="text-3xl md:text-4xl font-bold mb-12">About Us</h1>
+        <p className="text-gray-200 text-sm md:text-base leading-relaxed mb-4">
+          At CyberMoon, we`re a passionate group of gamers who believe the gaming industry, often
+          driven by corporate profits, has lost touch with the true spirit of gaming. Our mission is to
+          create games by gamers, for gamers, through an open and collaborative development process.
+          We`re dedicated to delivering engaging, heartfelt experiences that resonate with players
+          while staying true to our love for gaming.
+        </p>
+        <p className="text-gray-200 text-sm md:text-base leading-relaxed mb-4">
+          Our journey began with a shared dream, sparked in a Telegram channel where strangers united
+          around a bold vision: to craft games with heart, not just for profit. Every member of our
+          team works voluntarily, fueled by a deep passion for games and a commitment to building
+          something extraordinary.
+        </p>
+        <p className="text-gray-200 text-sm md:text-base leading-relaxed">
+          Today, our team of {teamMembers.length} talented individuals continues to grow, and we`re always eager to
+          welcome new ideas and collaborators. Join us in shaping the future of gaming—reach out and
+          let`s create unforgettable games together!
+        </p>
+      </div>
+
+      {/* Team Section */}
+      <div className="w-full">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-10">Meet Our Team</h2>
+        <div className="flex flex-wrap justify-center items-start gap-8">
+          {teamMembers.map((member) => (
+            <TeamMemberCard key={member.id} {...member} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AboutUs;

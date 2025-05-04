@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 
 interface NavLink {
   href: string;
@@ -11,11 +11,11 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { href: '/games', label: 'Games' },
-  { href: '/contact', label: 'Contact' },
-  { href: 'https://store.steampowered.com/curator/45475078', label: 'Steam', isExternal: true },
-  { href: '/about', label: 'About' },
-  { href: '/support-us', label: 'Support Us' },
+  { href: "/games", label: "Games" },
+  { href: "/contact", label: "Contact" },
+  { href: "https://store.steampowered.com/curator/45475078", label: "Steam", isExternal: true },
+  { href: "/about", label: "About" },
+  { href: "/support-us", label: "Support Us" },
 ];
 
 const MenuIcon = (
@@ -46,20 +46,17 @@ const CloseIcon = (
   </svg>
 );
 
-const Navbar: React.FC = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
   };
 
   return (
-    <nav
-      className="bg-black text-white sticky top-0 z-50 font-jaro text-shadow"
-    >
+    <nav className="bg-black text-white sticky top-0 z-50 font-jaro text-shadow">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo and Company Name */}
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
               <Image
@@ -73,10 +70,8 @@ const Navbar: React.FC = () => {
               <span className="font-bold text-3xl">CyberMoon</span>
             </Link>
           </div>
-
-          {/* Desktop Navigation Links */}
           <div className="hidden md:flex md:items-center md:space-x-4">
-            {navLinks.map((link) => (
+            {navLinks.map((link) =>
               link.isExternal ? (
                 <a
                   key={link.href}
@@ -96,10 +91,8 @@ const Navbar: React.FC = () => {
                   {link.label}
                 </Link>
               )
-            ))}
+            )}
           </div>
-
-          {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
             <button
               onClick={toggleMobileMenu}
@@ -107,23 +100,21 @@ const Navbar: React.FC = () => {
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-colors duration-300"
               aria-controls="mobile-menu"
               aria-expanded={isMobileMenuOpen}
-              aria-label={isMobileMenuOpen ? 'Close main menu' : 'Open main menu'}
+              aria-label={isMobileMenuOpen ? "Close main menu" : "Open main menu"}
             >
               {isMobileMenuOpen ? CloseIcon : MenuIcon}
             </button>
           </div>
         </div>
       </div>
-
-      {/* Mobile Menu Panel */}
       <div
         className={`md:hidden bg-black transition-all duration-300 ease-in-out ${
-          isMobileMenuOpen ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'
+          isMobileMenuOpen ? "opacity-100" : "opacity-0 h-0 overflow-hidden"
         }`}
         id="mobile-menu"
       >
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          {navLinks.map((link) => (
+          {navLinks.map((link) =>
             link.isExternal ? (
               <a
                 key={link.href}
@@ -145,7 +136,7 @@ const Navbar: React.FC = () => {
                 {link.label}
               </Link>
             )
-          ))}
+          )}
         </div>
       </div>
     </nav>
