@@ -168,7 +168,7 @@ export default function ContactUs() {
             <br />
             For quicker responses connect with us on Telegram:{" "}
             <Link
-              href="https://t.me/cybermoon"
+              href="https://t.me/cybermoondev"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sky-400 hover:text-sky-300"
