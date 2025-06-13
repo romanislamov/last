@@ -1,64 +1,23 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #000000;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 @font-face {
-  font-family: 'Jaro';
+  font-family: 'SF-Pro';
   src: url('/fonts/SF-Pro.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
-html, body {
-  background-color: #000000;
-  color: var(--foreground);
-  overscroll-behavior: none;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+@font-face {
+  font-family: 'jaro';
+  src: url('/fonts/SF-Pro.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 body {
-  background: var(--background);
-  font-family: 'Jaro', sans-serif;
-}
-
-.font-jaro {
-  font-family: 'Jaro', sans-serif;
-}
-
-main {
-  flex-grow: 1;
-  background: linear-gradient(to bottom, #010124, #0080B7);
-  position: relative;
-  z-index: 0;
-}
-/* Required custom classes */
-.perspective-1000 {
-  perspective: 1000px;
-}
-
-.preserve-3d {
-  transform-style: preserve-3d;
-}
-
-.backface-hidden {
-  backface-visibility: hidden;
-}
-
-.rotate-y-180 {
-  transform: rotateY(180deg);
+  background-color: #000000;
+  color: #ffffff;
+  font-family: 'SF-Pro', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
